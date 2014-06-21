@@ -9,6 +9,7 @@ import org.junit.Test;
 import org.kiwi.api.ProductsResource;
 import org.kiwi.api.ResourceNotFoundException;
 import org.kiwi.api.ResourceNotFoundHandler;
+import org.kiwi.domain.Price;
 import org.kiwi.domain.Product;
 import org.kiwi.domain.ProductRepository;
 
@@ -23,7 +24,6 @@ import java.util.Map;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.core.IsAnything.any;
 import static org.mockito.Matchers.anyObject;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -36,7 +36,7 @@ public class ProductsResourceTest extends JerseyTest {
     @Before
     public void setUp() throws Exception {
         super.setUp();
-        dummyProduct = new Product(1, "apple juice", "YES", 15);
+        dummyProduct = new Product(1, "apple juice", "YES", new Price(15, "2014-07-03", "admin"));
     }
 
     @Override
@@ -119,6 +119,11 @@ public class ProductsResourceTest extends JerseyTest {
         HashMap newProduct = new HashMap<String, String>();
         newProduct.put("name", "new juice");
         newProduct.put("description", "hard");
+        HashMap newPrice = new HashMap<String, String>();
+        newPrice.put("price", 120);
+        newPrice.put("timestamp", "2014-03-03");
+        newPrice.put("modifiedBy", "admin");
+        newProduct.put("price", newPrice);
 
         final Response response = target("/products")
                 .request()

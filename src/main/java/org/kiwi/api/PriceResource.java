@@ -37,12 +37,7 @@ public class PriceResource {
     @Path("current")
     @Produces(MediaType.APPLICATION_JSON)
     public PriceRefJson getPrice() {
-        final List<Price> historyPrices = product.getHistoryPrices();
-        final Price currentPrice = historyPrices.stream()
-                .min((price1, price2) -> price1.getId() - price2.getId())
-                .get();
-
-        return new PriceRefJson(product, currentPrice);
+        return new PriceRefJson(product, product.getCurrentPrice());
     }
 
     @GET

@@ -51,9 +51,6 @@ public class PriceResourceTest extends JerseyTest {
     public void should_get_product_price() {
 
         when(mockProductRepository.findProductById(1)).thenReturn(mockProduct);
-        when(mockProduct.getId()).thenReturn(1);
-        when(mockProduct.getName()).thenReturn("apple juice");
-        when(mockProduct.getCurrentPrice()).thenReturn(15);
         when(mockProduct.getHistoryPrices()).thenReturn(Arrays.asList(new Price(1, 13, "2014-03-03", "admin")));
 
         final Response response = target("/products/1/prices/1")
@@ -71,10 +68,7 @@ public class PriceResourceTest extends JerseyTest {
     @Test
     public void should_get_product_current_price() {
         when(mockProductRepository.findProductById(1)).thenReturn(mockProduct);
-        when(mockProduct.getId()).thenReturn(1);
-        when(mockProduct.getName()).thenReturn("apple juice");
-        when(mockProduct.getCurrentPrice()).thenReturn(15);
-        when(mockProduct.getHistoryPrices()).thenReturn(Arrays.asList(new Price(1, 13, "2014-03-03", "admin")));
+        when(mockProduct.getCurrentPrice()).thenReturn(new Price(13, "2014-03-03", "admin"));
 
         final Response response = target("/products/1/prices/current")
                 .request()
@@ -91,9 +85,6 @@ public class PriceResourceTest extends JerseyTest {
     @Test
     public void should_get_product_history_prices() {
         when(mockProductRepository.findProductById(1)).thenReturn(mockProduct);
-        when(mockProduct.getId()).thenReturn(1);
-        when(mockProduct.getName()).thenReturn("apple juice");
-        when(mockProduct.getCurrentPrice()).thenReturn(15);
         when(mockProduct.getHistoryPrices()).thenReturn(Arrays.asList(new Price(1, 13, "2014-03-03", "admin")));
 
 

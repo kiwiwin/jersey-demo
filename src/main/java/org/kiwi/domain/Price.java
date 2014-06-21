@@ -32,6 +32,12 @@ public class Price {
         this.modifiedBy = modifiedBy;
     }
 
+    public Price(int price, String date, String modifiedBy) {
+        this.price = price;
+        this.date = date;
+        this.modifiedBy = modifiedBy;
+    }
+
     public int getId() {
         return id;
     }
