@@ -13,7 +13,7 @@
 
     <resultMap id="resultPrice" type="org.kiwi.domain.Price">
         <id property="id" column="id"/>
-        <result property="date" column="timestamp"/>
+        <result property="timestamp" column="timestamp"/>
         <result property="price" column="price"/>
         <result property="modifiedBy" column="modified_by"/>
     </resultMap>

@@ -16,7 +16,7 @@ public class PriceRefJson {
 
     public PriceRefJson(Product product, Price price) {
         this.uri = "/products/" + product.getId() + "/prices/" + price.getId();
-        this.timestamp = price.getDate();
+        this.timestamp = price.getTimestamp();
         this.price = price.getPrice();
         this.modifiedBy = price.getModifiedBy();
     }
