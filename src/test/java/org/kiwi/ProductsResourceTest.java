@@ -75,7 +75,7 @@ public class ProductsResourceTest extends JerseyTest {
 
     @Test
     public void should_get_product_by_id() {
-        when(mockProductRepository.findByProductId(1)).thenReturn(dummyProduct);
+        when(mockProductRepository.findProductById(1)).thenReturn(dummyProduct);
 
         final Response response = target("/products/1")
                 .request()
@@ -97,7 +97,7 @@ public class ProductsResourceTest extends JerseyTest {
 
     @Test
     public void should_get_404_when_request_product_is_not_exist() {
-        when(mockProductRepository.findByProductId(1)).thenThrow(new ResourceNotFoundException());
+        when(mockProductRepository.findProductById(1)).thenThrow(new ResourceNotFoundException());
 
         final Response response = target("/products/1")
                 .request()

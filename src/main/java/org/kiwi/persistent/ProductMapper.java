@@ -5,7 +5,7 @@ import org.kiwi.domain.Product;
 import java.util.List;
 
 public interface ProductMapper {
-    Product selectProductById(int id);
+    Product findProductById(int id);
 
     List<Product> all();
 }

@@ -19,7 +19,7 @@
     </resultMap>
 
 
-    <select id="selectProductById" resultType="org.kiwi.domain.Product" resultMap="resultProduct">
+    <select id="findProductById" resultType="org.kiwi.domain.Product" resultMap="resultProduct">
         select * from Product where id = #{id}
     </select>
 

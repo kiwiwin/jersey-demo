@@ -16,7 +16,7 @@ public class JerseyConfig extends ResourceConfig {
         register(new AbstractBinder() {
             @Override
             protected void configure() {
-                bind(new MyBatisProductRepository(MyBatisConnectionFactory.getSqlSessionFactory())).to(ProductRepository.class);
+                bind(MyBatisProductRepository.class).to(ProductRepository.class);
             }
         });
 

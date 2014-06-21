@@ -4,8 +4,6 @@ import org.kiwi.domain.Product;
 import org.kiwi.domain.ProductRepository;
 import org.kiwi.json.ProductRefJson;
 import org.kiwi.json.ProductsItemRefJson;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
 import javax.inject.Inject;
 import javax.ws.rs.*;
@@ -21,7 +19,7 @@ public class ProductsResource {
 
     @Path("{id}/prices")
     public PriceResource getPriceResource(@PathParam("id") int id) {
-        return new PriceResource(productRepository.findByProductId(id));
+        return new PriceResource(productRepository.findProductById(id));
     }
 
 
@@ -37,7 +35,7 @@ public class ProductsResource {
     @Path("{id}")
     @Produces(MediaType.APPLICATION_JSON)
     public ProductRefJson getProductById(@PathParam("id") int id) {
-        final Product product = productRepository.findByProductId(id);
+        final Product product = productRepository.findProductById(id);
         if (product == null) {
             throw new ResourceNotFoundException();
         }

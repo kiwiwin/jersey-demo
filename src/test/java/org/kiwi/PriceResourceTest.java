@@ -50,7 +50,7 @@ public class PriceResourceTest extends JerseyTest {
     @Test
     public void should_get_product_price() {
 
-        when(mockProductRepository.findByProductId(1)).thenReturn(mockProduct);
+        when(mockProductRepository.findProductById(1)).thenReturn(mockProduct);
         when(mockProduct.getId()).thenReturn(1);
         when(mockProduct.getName()).thenReturn("apple juice");
         when(mockProduct.getCurrentPrice()).thenReturn(15);
@@ -70,7 +70,7 @@ public class PriceResourceTest extends JerseyTest {
 
     @Test
     public void should_get_product_current_price() {
-        when(mockProductRepository.findByProductId(1)).thenReturn(mockProduct);
+        when(mockProductRepository.findProductById(1)).thenReturn(mockProduct);
         when(mockProduct.getId()).thenReturn(1);
         when(mockProduct.getName()).thenReturn("apple juice");
         when(mockProduct.getCurrentPrice()).thenReturn(15);
@@ -90,7 +90,7 @@ public class PriceResourceTest extends JerseyTest {
 
     @Test
     public void should_get_product_history_prices() {
-        when(mockProductRepository.findByProductId(1)).thenReturn(mockProduct);
+        when(mockProductRepository.findProductById(1)).thenReturn(mockProduct);
         when(mockProduct.getId()).thenReturn(1);
         when(mockProduct.getName()).thenReturn("apple juice");
         when(mockProduct.getCurrentPrice()).thenReturn(15);
