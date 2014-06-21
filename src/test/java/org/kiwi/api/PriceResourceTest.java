@@ -1,4 +1,4 @@
-package org.kiwi;
+package org.kiwi.api;
 
 import org.glassfish.hk2.utilities.binding.AbstractBinder;
 import org.glassfish.jersey.jackson.JacksonFeature;
@@ -6,12 +6,16 @@ import org.glassfish.jersey.server.ResourceConfig;
 import org.glassfish.jersey.test.JerseyTest;
 import org.junit.Before;
 import org.junit.Test;
-import org.kiwi.api.ProductsResource;
-import org.kiwi.domain.*;
+import org.kiwi.domain.Price;
+import org.kiwi.domain.Product;
+import org.kiwi.domain.ProductRepository;
 
+import javax.ws.rs.client.Entity;
 import javax.ws.rs.core.Application;
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -102,5 +106,23 @@ public class PriceResourceTest extends JerseyTest {
         assertThat(price.get("price"), is(13));
         assertThat(price.get("timestamp"), is("2014-03-03"));
         assertThat(price.get("modifiedBy"), is("admin"));
+    }
+
+    @Test
+    public void should_add_new_price() {
+        when(mockProductRepository.findProductById(1)).thenReturn(mockProduct);
+        when(mockProduct.getId()).thenReturn(1);
+
+        HashMap newPrice = new HashMap<String, String>();
+        newPrice.put("price", 120);
+        newPrice.put("timestamp", "2014-03-03");
+        newPrice.put("modifiedBy", "admin");
+
+
+        final Response response = target("/products/1/prices")
+                .request()
+                .post(Entity.entity(newPrice, MediaType.APPLICATION_JSON));
+
+        assertThat(response.getStatus(), is(201));
     }
 }

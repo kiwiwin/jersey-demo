@@ -8,4 +8,6 @@ public interface ProductRepository {
     List<Product> all();
 
     int createProduct(Product product);
+
+    int addNewPrice(Product product, Price price);
 }

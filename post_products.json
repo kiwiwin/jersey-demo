@@ -1,0 +1,9 @@
+{
+	"name": "new juice",
+	"description": "hard to explain",
+	"price": {
+		"price": 120,
+		"timestamp": "2014-09-08",
+		"modifiedBy": "kiwi"
+	}
+}

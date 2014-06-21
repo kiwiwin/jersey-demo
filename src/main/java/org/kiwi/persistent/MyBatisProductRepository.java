@@ -1,6 +1,7 @@
 package org.kiwi.persistent;
 
 import org.apache.ibatis.session.SqlSession;
+import org.kiwi.domain.Price;
 import org.kiwi.domain.Product;
 import org.kiwi.domain.ProductRepository;
 
@@ -25,7 +26,18 @@ public class MyBatisProductRepository implements ProductRepository {
     public int createProduct(Product product) {
         try (SqlSession sqlSession = MyBatisConnectionFactory.getSqlSessionFactory().openSession()) {
             sqlSession.getMapper(ProductMapper.class).createProduct(product);
+            sqlSession.getMapper(PriceMapper.class).createPrice(product, product.getCurrentPrice());
+            sqlSession.commit();
             return product.getId();
+        }
+    }
+
+    @Override
+    public int addNewPrice(Product product, Price price) {
+        try (SqlSession sqlSession = MyBatisConnectionFactory.getSqlSessionFactory().openSession()) {
+            sqlSession.getMapper(PriceMapper.class).createPrice(product, price);
+            sqlSession.commit();
+            return price.getId();
         }
     }
 

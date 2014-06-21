@@ -7,6 +7,8 @@
         <id property="id" column="id"/>
         <result property="name" column="name"/>
         <result property="description" column="description"/>
+        <association property="currentPrice" column="id" javaType="org.kiwi.domain.Price"
+                     select="selectCurrentPrice"/>
         <collection property="historyPrices" column="id" javaType="List"
                     select="selectPrices" fetchType="lazy"/>
     </resultMap>
@@ -23,7 +25,7 @@
         select * from Product where id = #{id}
     </select>
 
-    <select id="all" resultType="org.kiwi.domain.Product">
+    <select id="all" resultType="org.kiwi.domain.Product" resultMap="resultProduct">
         select * from Product
     </select>
 
@@ -31,8 +33,12 @@
         select * from Price where product_id = #{id}
     </select>
 
-    <!--<insert id="createProduct" parameterType="org.kiwi.domain.Product" keyProperty="id" useGeneratedKeys="true" statementType="STATEMENT">-->
-        <!--insert into Product (name, description) values (#{name}, #{description}) returning id-->
-    <!--</insert>-->
+    <select id="selectCurrentPrice" parameterType="int" resultType="org.kiwi.domain.Price" resultMap="resultPrice">
+        select * from Price where id = (select max(id) from Price where product_id = 1)
+    </select>
+
+    <insert id="createProduct" parameterType="org.kiwi.domain.Product" keyProperty="id" useGeneratedKeys="true">
+        insert into Product (name, description) values (#{name}, #{description})
+    </insert>
 
 </mapper>

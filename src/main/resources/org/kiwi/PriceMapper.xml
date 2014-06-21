@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.kiwi.persistent.PriceMapper">
+    <resultMap id="resultPrice" type="org.kiwi.domain.Price">
+        <id property="id" column="id"/>
+        <result property="timestamp" column="timestamp"/>
+        <result property="price" column="price"/>
+        <result property="modifiedBy" column="modified_by"/>
+    </resultMap>
+
+    <insert id="createPrice" parameterType="map">
+        insert into Price (timestamp, price, modified_by, product_id) values
+        (#{price.timestamp}, #{price.price}, #{price.modifiedBy}, #{product.id})
+    </insert>
+
+</mapper>

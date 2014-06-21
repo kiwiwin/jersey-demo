@@ -11,7 +11,7 @@ public interface ProductMapper {
 
     List<Product> all();
 
-    @Insert("insert into Product (name, description) values (#{name}, #{description})")
-    @Options(keyProperty = "id", useGeneratedKeys = true)
+//    @Insert("insert into Product (name, description) values (#{name}, #{description})")
+//    @Options(keyProperty = "id", useGeneratedKeys = true)
     Integer createProduct(Product product);
 }

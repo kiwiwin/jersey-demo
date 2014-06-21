@@ -1,4 +1,4 @@
-package org.kiwi;
+package org.kiwi.api;
 
 import org.glassfish.hk2.utilities.binding.AbstractBinder;
 import org.glassfish.jersey.jackson.JacksonFeature;

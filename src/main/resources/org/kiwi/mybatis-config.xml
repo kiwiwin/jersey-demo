@@ -16,5 +16,6 @@
     </environments>
     <mappers>
         <mapper resource="org/kiwi/ProductMapper.xml"/>
+        <mapper resource="org/kiwi/PriceMapper.xml"/>
     </mappers>
 </configuration>

@@ -22,7 +22,7 @@ public class ProductsResource {
 
     @Path("{id}/prices")
     public PriceResource getPriceResource(@PathParam("id") int id) {
-        return new PriceResource(productRepository.findProductById(id));
+        return new PriceResource(productRepository, productRepository.findProductById(id));
     }
 
 

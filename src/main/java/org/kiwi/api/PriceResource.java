@@ -2,21 +2,23 @@ package org.kiwi.api;
 
 import org.kiwi.domain.Price;
 import org.kiwi.domain.Product;
+import org.kiwi.domain.ProductRepository;
+import org.kiwi.json.CreatePriceRefJson;
 import org.kiwi.json.PriceRefJson;
 
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class PriceResource {
+    private final ProductRepository productRepository;
     private final Product product;
 
-    public PriceResource(Product product) {
+    public PriceResource(ProductRepository productRepository, Product product) {
+        this.productRepository = productRepository;
         this.product = product;
     }
 
@@ -46,5 +48,12 @@ public class PriceResource {
         return product.getHistoryPrices().stream()
                 .map(price -> new PriceRefJson(product, price))
                 .collect(Collectors.toList());
+    }
+
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response addNewPrice(CreatePriceRefJson createPriceRefJson) {
+        final int priceId = productRepository.addNewPrice(product, createPriceRefJson.getPrice());
+        return Response.status(201).header("location", "/products/" + product.getId() + "/prices/" + priceId).build();
     }
 }
