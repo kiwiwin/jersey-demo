@@ -9,16 +9,22 @@ import org.junit.Test;
 import org.kiwi.api.ProductsResource;
 import org.kiwi.api.ResourceNotFoundException;
 import org.kiwi.api.ResourceNotFoundHandler;
-import org.kiwi.domain.*;
+import org.kiwi.domain.Product;
+import org.kiwi.domain.ProductRepository;
 
+import javax.ws.rs.client.Entity;
 import javax.ws.rs.core.Application;
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.core.IsAnything.any;
+import static org.mockito.Matchers.anyObject;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -108,6 +114,16 @@ public class ProductsResourceTest extends JerseyTest {
 
     @Test
     public void should_get_201_when_create_new_product() {
+        when(mockProductRepository.createProduct(anyObject())).thenReturn(3);
 
+        HashMap newProduct = new HashMap<String, String>();
+        newProduct.put("name", "new juice");
+        newProduct.put("description", "hard");
+
+        final Response response = target("/products")
+                .request()
+                .post(Entity.entity(newProduct, MediaType.APPLICATION_JSON));
+
+        assertThat(response.getStatus(), is(201));
     }
 }

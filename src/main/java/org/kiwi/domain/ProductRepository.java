@@ -7,4 +7,5 @@ public interface ProductRepository {
 
     List<Product> all();
 
+    int createProduct(Product product);
 }

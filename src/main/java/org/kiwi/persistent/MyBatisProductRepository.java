@@ -21,4 +21,12 @@ public class MyBatisProductRepository implements ProductRepository {
         }
     }
 
+    @Override
+    public int createProduct(Product product) {
+        try (SqlSession sqlSession = MyBatisConnectionFactory.getSqlSessionFactory().openSession()) {
+            sqlSession.getMapper(ProductMapper.class).createProduct(product);
+            return product.getId();
+        }
+    }
+
 }

@@ -31,4 +31,8 @@
         select * from Price where product_id = #{id}
     </select>
 
+    <!--<insert id="createProduct" parameterType="org.kiwi.domain.Product" keyProperty="id" useGeneratedKeys="true" statementType="STATEMENT">-->
+        <!--insert into Product (name, description) values (#{name}, #{description}) returning id-->
+    <!--</insert>-->
+
 </mapper>
