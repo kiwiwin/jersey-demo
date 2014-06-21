@@ -6,7 +6,7 @@ public class ProductRefJson {
     private int id;
     private String name;
     private String uri;
-    private String pricings_uri;
+    private String prices_uri;
     private CurrentPriceRefJson current_price;
     private String description;
     //for jackson
@@ -23,8 +23,8 @@ public class ProductRefJson {
         return uri;
     }
 
-    public String getPricings_uri() {
-        return pricings_uri;
+    public String getPrices_uri() {
+        return prices_uri;
     }
 
     public CurrentPriceRefJson getCurrent_price() {
@@ -43,7 +43,7 @@ public class ProductRefJson {
         uri = "/products/" + product.getId();
         id = product.getId();
         name = product.getName();
-        pricings_uri = "/products/" + product.getId() + "/pricings";
+        prices_uri = "/products/" + product.getId() + "/prices";
         current_price = new CurrentPriceRefJson(product.getId(), product.getCurrentPrice());
         description = product.getDescription();
     }
