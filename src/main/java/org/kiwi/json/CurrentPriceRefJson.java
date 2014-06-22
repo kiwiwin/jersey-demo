@@ -13,7 +13,7 @@ public class CurrentPriceRefJson {
 
     public CurrentPriceRefJson(int productId, Price price) {
         this.price = price;
-        this.uri = "/products/" + productId + "/current";
+        this.uri = "/products/" + productId + "/prices/current";
     }
 
     public int getPrice() {
