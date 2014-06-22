@@ -3,4 +3,3 @@ CREATE TABLE Product (
   name VARCHAR(32) NOT NULL,
   description VARCHAR(255)
 );
-

@@ -1,0 +1,30 @@
+import groovy.sql.Sql
+
+configurations {
+    driver
+}
+
+task createTestData << {
+    URLClassLoader loader = GroovyObject.class.classLoader
+    configurations.driver.each { File file ->
+        loader.addURL(file.toURL())
+    }
+
+    def user = 'postgres'
+    def password = 'postgres'
+    def url = 'jdbc:postgresql://localhost:5432/wen'
+    def driver = "org.postgresql.Driver"
+
+    try {
+        def sqlScripts = ['clean_test_data', 'create_test_data']
+        groovy.sql.Sql sqlE = groovy.sql.Sql.newInstance(url, user, password, driver)
+        sqlScripts.each {
+            new File("$project.projectDir" + "/fixture/" + it + ".sql").text.split(";").each {
+                logger.info it
+                sqlE.execute(it)
+            }
+        }
+    } catch (Exception e) {
+        println e.message
+    }
+}

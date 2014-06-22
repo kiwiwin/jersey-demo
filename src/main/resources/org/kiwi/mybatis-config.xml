@@ -13,6 +13,15 @@
                 <property name="password" value="postgres"/>
             </dataSource>
         </environment>
+        <environment id="test">
+            <transactionManager type="JDBC"/>
+            <dataSource type="POOLED">
+                <property name="driver" value="org.postgresql.Driver"/>
+                <property name="url" value="jdbc:postgresql://localhost:5432/wen"/>
+                <property name="username" value="postgres"/>
+                <property name="password" value="postgres"/>
+            </dataSource>
+        </environment>
     </environments>
     <mappers>
         <mapper resource="org/kiwi/ProductMapper.xml"/>
