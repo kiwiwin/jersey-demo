@@ -75,7 +75,7 @@ public class ProductsResourceTest extends JerseyTest {
         assertThat(productProperties.get("name"), is("apple juice"));
 
         final Map currentPriceProperties = (Map) productProperties.get("price");
-        assertThat(currentPriceProperties.get("uri"), is("/products/1/current"));
+        assertThat(currentPriceProperties.get("uri"), is("/products/1/prices/current"));
         assertThat(currentPriceProperties.get("price"), is(15));
     }
 
@@ -97,7 +97,7 @@ public class ProductsResourceTest extends JerseyTest {
         assertThat(productProperties.get("description"), is("YES"));
 
         final Map currentPriceProperties = (Map) productProperties.get("current_price");
-        assertThat(currentPriceProperties.get("uri"), is("/products/1/current"));
+        assertThat(currentPriceProperties.get("uri"), is("/products/1/prices/current"));
         assertThat(currentPriceProperties.get("price"), is(15));
     }
 
